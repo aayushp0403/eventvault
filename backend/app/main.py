@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from app.core.config import settings
 from app.db.database import Base, engine
 from app.models import user, event, album, media, social  # noqa
-from app.api.v1.endpoints import auth, users
+from app.api.v1.endpoints import auth, users, events, albums, media as media_router, ai, notifications
 import os
 
 Base.metadata.create_all(bind=engine)
@@ -28,8 +28,13 @@ app.add_middleware(
 os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
-app.include_router(auth.router,  prefix="/api/v1/auth",  tags=["Auth"])
-app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
+app.include_router(auth.router,          prefix="/api/v1/auth",          tags=["Auth"])
+app.include_router(users.router,         prefix="/api/v1/users",         tags=["Users"])
+app.include_router(events.router,        prefix="/api/v1/events",        tags=["Events"])
+app.include_router(albums.router,        prefix="/api/v1/albums",        tags=["Albums"])
+app.include_router(media_router.router,  prefix="/api/v1/media",         tags=["Media"])
+app.include_router(ai.router,            prefix="/api/v1/ai",            tags=["AI"])
+app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
 
 @app.get("/", tags=["Health"])
 def root():
