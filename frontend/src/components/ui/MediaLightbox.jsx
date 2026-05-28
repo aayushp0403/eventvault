@@ -3,8 +3,7 @@ import { X, ChevronLeft, ChevronRight, Download, MessageCircle, Send } from "luc
 import api from "../../lib/api";
 import toast from "react-hot-toast";
 
-const BASE = "http://localhost:8000";
-
+const BASE = "";
 export default function MediaLightbox({ media, onClose, onPrev, onNext }) {
   const [comments, setComments] = useState([]);
   const [body, setBody]         = useState("");

@@ -24,6 +24,8 @@ export default function App() {
           position="top-right"
           toastOptions={{
             style: { background: "#13131f", color: "#e8e8f0", border: "1px solid rgba(200,255,0,0.2)" },
+            error: { style: { border: "1px solid rgba(255,92,26,0.4)" } },
+
           }}
         />
         <Routes>

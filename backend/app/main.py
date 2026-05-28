@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.openapi.utils import get_openapi
 from app.core.config import settings
 from app.db.database import Base, engine
 from app.models import user, event, album, media, social  # noqa
@@ -43,3 +44,27 @@ def root():
 @app.get("/api/health", tags=["Health"])
 def health():
     return {"status": "healthy"}
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    schema = get_openapi(
+        title=settings.APP_NAME,
+        version=settings.APP_VERSION,
+        routes=app.routes,
+    )
+    schema["components"]["securitySchemes"] = {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+        }
+    }
+    for path in schema.get("paths", {}).values():
+        for method in path.values():
+            if "security" in method:
+                method["security"] = [{"BearerAuth": []}]
+    app.openapi_schema = schema
+    return schema
+
+app.openapi = custom_openapi

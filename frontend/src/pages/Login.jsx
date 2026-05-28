@@ -19,7 +19,11 @@ export default function Login() {
       toast.success("Welcome back 👋");
       navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.detail || "Login failed");
+      const msg =
+        err.response?.data?.detail ||
+        err.response?.data?.message ||
+        "Invalid email or password";
+      toast.error(msg);
     } finally {
       setLoad(false);
     }
@@ -27,14 +31,12 @@ export default function Login() {
 
   return (
     <div className="grain min-h-screen bg-obsidian-950 flex items-center justify-center px-4">
-      {/* Background blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-volt/5 blur-[120px]" />
         <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-ember/5 blur-[100px]" />
       </div>
 
       <div className="w-full max-w-md animate-fade-up">
-        {/* Logo */}
         <div className="flex items-center gap-3 mb-10 justify-center">
           <div className="w-11 h-11 rounded-2xl bg-volt flex items-center justify-center glow-volt">
             <Aperture size={22} className="text-obsidian-950" strokeWidth={2.5} />
@@ -77,6 +79,7 @@ export default function Login() {
               </div>
             </div>
 
+            {/* Inline error state on the button itself as backup */}
             <button
               type="submit" disabled={loading}
               className="w-full bg-volt text-obsidian-950 font-display font-bold py-3 rounded-xl hover:bg-volt-dark transition-all glow-volt disabled:opacity-60 disabled:cursor-not-allowed mt-2"

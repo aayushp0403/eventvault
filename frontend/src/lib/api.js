@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: "http://localhost:8000" });
+const api = axios.create({ baseURL: "" });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("ev_token");
@@ -11,7 +11,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (r) => r,
   (err) => {
-    if (err.response?.status === 401) {
+    // Only auto-redirect on 401 if we're NOT on an auth endpoint
+    const url = err.config?.url || "";
+    const isAuthCall = url.includes("/auth/login") || url.includes("/auth/register");
+
+    if (err.response?.status === 401 && !isAuthCall) {
       localStorage.removeItem("ev_token");
       localStorage.removeItem("ev_user");
       window.location.href = "/login";

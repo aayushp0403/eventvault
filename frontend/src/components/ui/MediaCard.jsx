@@ -3,8 +3,7 @@ import { Heart, MessageCircle, Download, Tag } from "lucide-react";
 import api from "../../lib/api";
 import toast from "react-hot-toast";
 
-const BASE = "http://localhost:8000";
-
+const BASE = "";
 export default function MediaCard({ media, onClick }) {
   const [likes, setLikes]   = useState(media.like_count || 0);
   const [liked, setLiked]   = useState(false);

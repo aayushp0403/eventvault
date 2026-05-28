@@ -53,8 +53,7 @@ export default function AISearch() {
     } finally { setFL(false); }
   };
 
-  const BASE = "http://localhost:8000";
-
+const BASE = "";
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
