@@ -80,6 +80,87 @@ App: http://localhost:5173
 
 ---
 
+## Screenshots
+
+### 🔐 Authentication
+**Login Page**
+![Login](assets/screenshots/login.jpeg)
+
+**Register Page — Role Selection**
+![Register](assets/screenshots/register.jpeg)
+
+---
+
+### 📊 Dashboard
+![Dashboard](assets/screenshots/dashboard.jpeg)
+
+---
+
+### 📅 Event Management
+**Events List with Category Filter**
+![Events](assets/screenshots/events.jpeg)
+
+---
+
+### 🖼️ Event Detail & Tag Filter
+![Event Detail](assets/screenshots/event-detail.jpeg)
+
+---
+
+### 💬 Photo Lightbox with Comments
+![Lightbox](assets/screenshots/lightbox.jpeg)
+
+---
+
+### 📤 Media Upload System
+**Files Queued for Upload**
+![Upload Preview](assets/screenshots/upload-preview.jpeg)
+
+**AI Tags Generated After Upload**
+![Upload Tags](assets/screenshots/upload-tags.jpeg)
+
+---
+
+### 💧 Dynamic Watermark on Download
+![Watermark](assets/screenshots/watermark.jpeg)
+
+---
+
+### 🤖 AI Smart Tag Search
+![AI Search](assets/screenshots/ai-search-tag.jpeg)
+
+---
+
+### 🤖 Facial Recognition — Find Me in Photos
+![Face Match](assets/screenshots/face-match.png)
+
+---
+
+### ❤️ Social Features — Likes & Comments
+![Social](assets/screenshots/social.png)
+
+---
+
+### 🔔 Notifications
+![Notifications](assets/screenshots/notifications.png)
+
+---
+
+### 🔒 Role Based Access Control
+**Viewer Blocked — 403 Forbidden**
+![403](assets/screenshots/403-forbidden.jpeg)
+
+**Admin Success — 201 Created**
+![201](assets/screenshots/201-created.jpeg)
+
+---
+
+### 📋 Swagger API Documentation
+![Swagger](assets/screenshots/swagger.jpeg)
+
+
+---
+
 ## Architecture
 
 ┌─────────────────────────────────────────────────────────┐
