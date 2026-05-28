@@ -163,6 +163,7 @@ App: http://localhost:5173
 
 ## Architecture
 
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                     FRONTEND (React)                     │
 │  Login/Register → AppShell (Sidebar + Topbar)           │
@@ -191,11 +192,13 @@ App: http://localhost:5173
 │   SQLite (eventvault.db) │
 │   + Local uploads/       │
 └─────────────────────────┘
+```
 
 ---
 
 ## Project Structure
 
+```text
 /
 ├── backend/
 │   ├── app/
@@ -220,6 +223,7 @@ App: http://localhost:5173
 ├── lib/                api.js
 └── pages/              Dashboard · Events · EventDetail
 Upload · AISearch · Notifications
+```
 
 ---
 
