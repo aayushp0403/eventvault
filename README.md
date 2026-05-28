@@ -229,14 +229,14 @@ Upload · AISearch · Notifications
 
 ## Evaluation Coverage
 
-| Criterion                   | Weight | Implementation                              |
-|-----------------------------|--------|---------------------------------------------|
-| UI/UX and Design            | 15%    | Volt/obsidian design system, Clash Display  |
-| Backend Architecture & APIs | 15%    | FastAPI, SQLAlchemy, 7 routers, clean DI    |
-| Authentication & Access     | 10%    | JWT, bcrypt, 4-role RBAC guards             |
-| Cloud Integration           | 15%    | Local FS (S3-ready UPLOAD_DIR config)       |
-| Media Management            | 15%    | Bulk upload, thumbnails, albums, download   |
-| AI/ML Features              | 15%    | Auto-tagging, histogram face-match, search  |
-| Real-time Notifications     | 5%     | DB-backed notifs, unread badge, bell        |
-| Code Quality & Scalability  | 5%     | Typed schemas, service layer, env config    |
-| Innovation & Bonus          | 5%     | Watermark, lightbox, infinite scroll, grain |
+| Criterion | Implementation |
+| :--- | :--- |
+| UI/UX and Design | Volt/obsidian design system, Clash Display |
+| Backend Architecture & APIs | FastAPI, SQLAlchemy, 7 routers, clean DI |
+| Authentication & Access | JWT, bcrypt, 4-role RBAC guards |
+| Cloud Integration | Local FS (S3-ready UPLOAD_DIR config) |
+| Media Management | Bulk upload, thumbnails, albums, download |
+| AI/ML Features | Auto-tagging, histogram face-match, search |
+| Real-time Notifications | DB-backed notifs, unread badge, bell |
+| Code Quality & Scalability | Typed schemas, service layer, env config |
+| Innovation & Bonus | Watermark, lightbox, infinite scroll, grain |
