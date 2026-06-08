@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Heart, MessageCircle, Download, Tag } from "lucide-react";
+import { Heart, MessageCircle, Download, Trash2 } from "lucide-react";
 import api from "../../lib/api";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
 
 const BASE = "";
-export default function MediaCard({ media, onClick }) {
+
+export default function MediaCard({ media, onClick, onDeleted }) {
+  const { user }            = useAuth();
   const [likes, setLikes]   = useState(media.like_count || 0);
   const [liked, setLiked]   = useState(false);
+
+  const canDelete = user?.role === "admin" || user?.role === "photographer";
 
   const thumbSrc = media.thumbnail_path
     ? `${BASE}/${media.thumbnail_path.replace(/\\/g, "/")}`
@@ -25,19 +30,30 @@ export default function MediaCard({ media, onClick }) {
 
   const handleDownload = async (e) => {
     e.stopPropagation();
-    const link = document.createElement("a");
-    link.href = `${BASE}/api/v1/media/${media.id}/download`;
-    link.download = media.original_name || "photo";
     const token = localStorage.getItem("ev_token");
     try {
-      const res = await fetch(link.href, { headers: { Authorization: `Bearer ${token}` } });
+      const res  = await fetch(`/api/v1/media/${media.id}/download`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      link.href = url;
+      const url  = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href  = url;
+      link.download = media.original_name || "photo";
       link.click();
       URL.revokeObjectURL(url);
       toast.success("Downloaded with watermark");
     } catch { toast.error("Download failed"); }
+  };
+
+  const handleDelete = async (e) => {
+    e.stopPropagation();
+    if (!window.confirm("Delete this photo permanently?")) return;
+    try {
+      await api.delete(`/api/v1/media/${media.id}`);
+      toast.success("Photo deleted");
+      onDeleted?.(media.id);
+    } catch { toast.error("Delete failed"); }
   };
 
   return (
@@ -62,11 +78,22 @@ export default function MediaCard({ media, onClick }) {
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      {/* Actions */}
+      {/* Delete button — top right */}
+      {canDelete && (
+        <button
+          onClick={handleDelete}
+          className="absolute top-2 right-2 w-7 h-7 rounded-lg bg-obsidian-950/80 border border-white/10 flex items-center justify-center text-white/40 hover:text-ember hover:border-ember/40 hover:bg-ember/10 opacity-0 group-hover:opacity-100 transition-all z-10"
+        >
+          <Trash2 size={13} />
+        </button>
+      )}
+
+      {/* Bottom actions */}
       <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button onClick={handleLike} className="flex items-center gap-1 text-xs font-medium transition-colors"
+            <button onClick={handleLike}
+              className="flex items-center gap-1 text-xs font-medium transition-colors"
               style={{ color: liked ? "#ff5c1a" : "rgba(255,255,255,0.7)" }}>
               <Heart size={14} fill={liked ? "#ff5c1a" : "none"} />
               {likes}

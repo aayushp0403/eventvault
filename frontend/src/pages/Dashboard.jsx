@@ -120,7 +120,12 @@ export default function Dashboard() {
           <h2 className="font-display text-lg font-bold text-white mb-4">Recent Uploads</h2>
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {recent.map(m => (
-              <MediaCard key={m.id} media={m} onClick={setSelected} />
+             <MediaCard
+                key={m.id}
+                media={m}
+                onClick={setSelected}
+                onDeleted={(id) => setRecent(prev => prev.filter(x => x.id !== id))}
+              />
             ))}
           </div>
         </div>

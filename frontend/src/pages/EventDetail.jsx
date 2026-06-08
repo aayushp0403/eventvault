@@ -94,7 +94,11 @@ export default function EventDetail() {
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {paginated.map((m, i) => (
               <div key={m.id} className="animate-fade-up" style={{ animationDelay: `${(i % PER_PAGE) * 30}ms`, animationFillMode: "both" }}>
-                <MediaCard media={m} onClick={setSelected} />
+              <MediaCard
+                media={m}
+                onClick={setSelected}
+                onDeleted={(id) => setMedia(prev => prev.filter(x => x.id !== id))}
+              />
               </div>
             ))}
           </div>
