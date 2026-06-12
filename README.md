@@ -1,6 +1,6 @@
 
 
-# EventVault — Event & Media Management Platform
+# AI-Powered Event and Media Management Platform
 
 A full-stack, production-ready platform for clubs and societies to upload, organize, and interact with event media — with AI tagging, facial recognition, role-based access, and dynamic watermarking.
 
